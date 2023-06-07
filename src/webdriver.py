@@ -10,7 +10,7 @@ import logging
 
 class WebDriver:
     __drivers = []
-    __driver_manager = ChromeDriverManager(log_level=logging.WARNING, cache_valid_range=15)
+    __driver_manager = ChromeDriverManager(cache_valid_range=15)
     __options = webdriver.ChromeOptions()
     __options.add_argument("--headless")
     __options.add_argument("--disable-dev-shm-usage")
