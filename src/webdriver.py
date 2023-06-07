@@ -6,25 +6,24 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from threading import Thread
+import logging
 
 class WebDriver:
     __drivers = []
+    __driver_manager = ChromeDriverManager(log_level=logging.WARNING, cache_valid_range=15)
     __options = webdriver.ChromeOptions()
     __options.add_argument("--headless")
-    __options.add_argument("--no-sandbox")
     __options.add_argument("--disable-dev-shm-usage")
     
-    __prefs = {"profile.managed_default_content_settings.images":2}
     __options.headless = True
     
-    __options.add_experimental_option("prefs", __prefs)
     
     def __init__(self) -> None:
         for _ in range(2):
             Thread(
                 target= lambda: WebDriver.__drivers.append(
                     webdriver.Chrome(
-                        service=Service(ChromeDriverManager().install()),
+                        executable_path=WebDriver.__driver_manager.install(),
                         options=WebDriver.__options
                     )
                 )
