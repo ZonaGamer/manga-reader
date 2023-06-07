@@ -6,11 +6,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.edge.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from threading import Thread
-import os
 
 class WebDriver:
     __drivers = []
-    __service = Service(ChromeDriverManager().install())
     __options = webdriver.ChromeOptions()
     __options.add_argument("--headless")
     __options.add_argument("--no-sandbox")
@@ -24,7 +22,7 @@ class WebDriver:
             Thread(
                 target= lambda: WebDriver.__drivers.append(
                     webdriver.Chrome(
-                        service=WebDriver.__service,
+                        service=Service(ChromeDriverManager().install()),
                         options=WebDriver.__options
                     )
                 )
@@ -36,7 +34,7 @@ class WebDriver:
         Thread(
             target= lambda: WebDriver.__drivers.append(
                 webdriver.Chrome(
-                    service=WebDriver.__service, 
+                    service=Service(ChromeDriverManager().install()), 
                     options=WebDriver.__options
                 )
             )
