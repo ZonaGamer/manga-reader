@@ -13,9 +13,11 @@ class WebDriver:
     __options.add_argument("--headless")
     __options.add_argument("--no-sandbox")
     __options.add_argument("--disable-dev-shm-usage")
+    
     __prefs = {"profile.managed_default_content_settings.images":2}
-    __options.add_experimental_option("prefs", __prefs)
     __options.headless = True
+    
+    __options.add_experimental_option("prefs", __prefs)
     
     def __init__(self) -> None:
         for _ in range(2):
