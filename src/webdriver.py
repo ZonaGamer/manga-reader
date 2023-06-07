@@ -13,6 +13,7 @@ class WebDriver:
     __driver_manager = ChromeDriverManager(cache_valid_range=15)
     __options = webdriver.ChromeOptions()
     __options.add_argument("--headless")
+    __options.add_argument("--no-sandbox")
     __options.add_argument("--disable-dev-shm-usage")
     
     __options.headless = True
